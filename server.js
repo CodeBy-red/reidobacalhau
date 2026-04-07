@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static('.')); // Servir arquivos estáticos
 
 // Configuração Google Sheets
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
