@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Rei do Bacalhau - Marmitarias Premium</title>
+    <meta name="description" content="Marmitas artesanais com sabor de restaurante. Especialistas em bacalhau e pratos executivos premium.">
+    <meta name="keywords" content="marmitaria, bacalhau, comida, delivery, restaurante premium">
+    <meta property="og:title" content="O Rei do Bacalhau - Marmitarias Premium">
+    <meta property="og:description" content="Marmitas artesanais com sabor de restaurante. Todas as marmitas possuem 600g.">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="img/logo_minimalista.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="img/logo_principal.png" alt="O Rei do Bacalhau" class="logo-img">
+                    <h1>O Rei do Bacalhau</h1>
+                    <p class="tagline">Marmitas artesanais com sabor de restaurante</p>
+                </div>
+                <div class="header-info">
+                    <span class="highlight">Todas as marmitas 600g</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Marmitarias Premium</h2>
+                    <p>Sabor artesanal que transforma seu dia</p>
+                    <button class="btn-primary" onclick="scrollToMenu()">Ver Cardápio</button>
+                </div>
+                <div class="hero-image">
+                    <img src="img/banner.png" alt="Marmitas artesanais premium" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Nossas Categorias</h2>
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="todos">Todos</button>
+                <button class="category-btn" data-category="executivos">Pratos Executivos</button>
+                <button class="category-btn" data-category="bacalhau">Bacalhau</button>
+                <button class="category-btn" data-category="massas">Massas</button>
+                <button class="category-btn" data-category="caldos">Caldos</button>
+            </div>
+            <div class="reload-section">
+                <button class="reload-btn" onclick="reloadMenu()" title="Recarregar cardápio (Ctrl+Shift+R)">
+                    🔄 Atualizar Cardápio
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Nosso Cardápio</h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart -->
+    <div class="cart-widget" id="cartWidget">
+        <div class="cart-icon" onclick="toggleCart()">
+            <span class="cart-count" id="cartCount">0</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 2L6 9H3L5 22H19L21 9H18L15 2H9Z"/>
+                <path d="M9 2V9"/>
+                <path d="M15 2V9"/>
+            </svg>
+        </div>
+        
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>Seu Pedido</h3>
+                <button class="close-btn" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Seu carrinho está vazio</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="total-value" id="cartTotal">R$ 0,00</span>
+                </div>
+                <button class="btn-primary checkout-btn" onclick="checkout()">
+                    Finalizar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5511922048764" target="_blank" class="whatsapp-float">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 9.891-5.335 9.891-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
