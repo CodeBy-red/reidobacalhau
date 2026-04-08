@@ -448,18 +448,12 @@ async function checkout() {
     }
     
     // Gerar mensagem do WhatsApp
-    let message = 'Olá! Gostaria de fazer um pedido:%0A%0A';
+    const items = cart.map(item => `*${item.name}* x ${item.quantity}`).join('%0A');
+    const totalFormatted = total.toFixed(2).replace('.', ',');
     
-    cart.forEach(item => {
-        message += `*${item.name}* x ${item.quantity}%0A`;
-    });
+    const message = `Olá! Gostaria de fazer um pedido:%0A%0A${items}%0A%0A*Total: R$ ${totalFormatted}*%0A%0APodem confirmar o pedido e o tempo de entrega?`;
     
-    message += `%0A%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*%0A%0A`;
-    message += 'Podem confirmar o pedido e o tempo de entrega?';
-    
-    // Usar encodeURI em vez de encodeURIComponent para melhor handle de acentos
-    const encodedMessage = encodeURI(message);
-    const whatsappUrl = `https://wa.me/5511922048764?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/5511922048764?text=${encodeURIComponent(message)}`;
     
     // Limpar carrinho após pedido
     cart = [];
