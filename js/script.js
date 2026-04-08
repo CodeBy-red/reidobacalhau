@@ -451,10 +451,10 @@ async function checkout() {
     let message = 'Olá! Gostaria de fazer um pedido:%0A%0A';
     
     cart.forEach(item => {
-        message += `*${item.name}* x ${item.quantity}%0A`;
+        message += `*${encodeURIComponent(item.name)}* x ${item.quantity}%0A`;
     });
     
-    message += `%0A*Total: R$ ${total.toFixed(2)}*%0A%0A`;
+    message += `%0A%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*%0A%0A`;
     message += 'Podem confirmar o pedido e o tempo de entrega?';
     
     const whatsappUrl = `https://wa.me/5511922048764?text=${encodeURIComponent(message)}`;
