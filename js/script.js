@@ -457,7 +457,9 @@ async function checkout() {
     message += `%0A%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*%0A%0A`;
     message += 'Podem confirmar o pedido e o tempo de entrega?';
     
-    const whatsappUrl = `https://wa.me/5511922048764?text=${encodeURIComponent(message)}`;
+    // Usar encodeURI em vez de encodeURIComponent para melhor handle de acentos
+    const encodedMessage = encodeURI(message);
+    const whatsappUrl = `https://wa.me/5511922048764?text=${encodedMessage}`;
     
     // Limpar carrinho após pedido
     cart = [];
