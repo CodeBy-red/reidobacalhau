@@ -37,8 +37,7 @@ app.get('/api/cardapio', async (req, res) => {
         console.log('RANGE:', process.env.RANGE);
         
         const authClient = await auth.getClient();
-        await google.auth.setCredentials(authClient.credentials);
-
+        
         const response = await sheets.spreadsheets.values.get({
             auth: authClient,
             spreadsheetId: spreadsheetId,
@@ -74,8 +73,7 @@ app.get('/api/cardapio', async (req, res) => {
 app.get('/api/estoque', async (req, res) => {
     try {
         const authClient = await auth.getClient();
-        await google.auth.setCredentials(authClient.credentials);
-
+        
         const response = await sheets.spreadsheets.values.get({
             auth: authClient,
             spreadsheetId: spreadsheetId,
@@ -111,7 +109,6 @@ app.post('/api/pedidos', async (req, res) => {
         const { cliente, itens, total, data_pedido } = req.body;
 
         const authClient = await auth.getClient();
-        await google.auth.setCredentials(authClient.credentials);
 
         // Buscar dados atuais da aba "Pedidos"
         const response = await sheets.spreadsheets.values.get({
@@ -149,7 +146,6 @@ app.post('/api/pedidos', async (req, res) => {
 app.get('/api/debug', async (req, res) => {
     try {
         const authClient = await auth.getClient();
-        await google.auth.setCredentials(authClient.credentials);
 
         const response = await sheets.spreadsheets.values.get({
             auth: authClient,
