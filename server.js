@@ -6,10 +6,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Servir arquivos estáticos primeiro
+app.use(express.static('.'));
+
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // Servir arquivos estáticos
 
 // Configuração Google Sheets
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
