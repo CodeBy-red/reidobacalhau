@@ -448,24 +448,16 @@ async function checkout() {
     }
     
     // Gerar mensagem do WhatsApp
-    const items = cart.map(item => {
-        // Codificar manualmente caracteres problemáticos
-        const cleanName = item.name
-            .replace(/é/g, 'e%CC%A9')
-            .replace(/á/g, 'a%CC%A1')
-            .replace(/í/g, 'i%CC%AD')
-            .replace(/ó/g, 'o%CC%B3')
-            .replace(/ú/g, 'u%CC%BA')
-            .replace(/ç/g, 'c%CC%A7')
-            .replace(/ã/g, 'a%CC%A3')
-            .replace(/õ/g, 'o%CC%B5');
-        
-        return `*${cleanName}* x ${item.quantity}`;
-    }).join('%0A');
-    
+    const items = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
     const totalFormatted = total.toFixed(2).replace('.', ',');
     
-    const message = `Olá! Gostaria de fazer um pedido:%0A%0A${items}%0A%0A*Total: R$ ${totalFormatted}*%0A%0APodem confirmar o pedido e o tempo de entrega?`;
+    const message = `Olá! Gostaria de fazer um pedido:
+
+${items}
+
+Total: R$ ${totalFormatted}
+
+Podem confirmar o pedido e o tempo de entrega?`;
     
     const whatsappUrl = `https://wa.me/5511922048764?text=${encodeURIComponent(message)}`;
     
