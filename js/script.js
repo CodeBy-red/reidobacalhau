@@ -62,14 +62,17 @@ async function loadMenuFromSheets() {
         const data = await response.json();
         
         // Converter dados do Sheets para formato esperado
-        menuData = data.map(item => {
+        menuData = data.map((item, index) => {
+            console.log(`Item ${index}:`, item);
+            console.log(`Chaves disponíveis:`, Object.keys(item));
+            
             const precoBruto = item.Preço || item.preco || '0';
             const precoLimpo = precoBruto.toString().replace(',', '.');
             const precoConvertido = parseFloat(precoLimpo);
             
             console.log(`Convertendo preço: ${item.Produto} | Bruto: ${precoBruto} | Limpo: ${precoLimpo} | Convertido: ${precoConvertido}`);
             
-            return {
+            const result = {
                 name: item.Produto || item.produto || item.nome || '',
                 price: precoConvertido,
                 category: item.Categoria || item.categoria || 'executivos',
@@ -79,6 +82,9 @@ async function loadMenuFromSheets() {
                 description: item.descricao || 'Marmita artesanal com 600g de pura qualidade',
                 rowIndex: item.row_index
             };
+            
+            console.log(`Result ${index}:`, result);
+            return result;
         });
         
         console.log('Dados brutos do Sheets:', data.slice(0, 3)); // Mostrar primeiros 3 itens
