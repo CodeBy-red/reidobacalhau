@@ -13,6 +13,19 @@ app.use(express.static('.'));
 app.use(cors());
 app.use(express.json());
 
+// Rotas explícitas para arquivos estáticos (fallback)
+app.get('/js/script.js', (req, res) => {
+    res.sendFile(__dirname + '/js/script.js');
+});
+
+app.get('/css/style.css', (req, res) => {
+    res.sendFile(__dirname + '/css/style.css');
+});
+
+app.get('/img/:filename', (req, res) => {
+    res.sendFile(__dirname + '/img/' + req.params.filename);
+});
+
 // Configuração Google Sheets
 const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 const spreadsheetId = process.env.SPREADSHEET_ID;
