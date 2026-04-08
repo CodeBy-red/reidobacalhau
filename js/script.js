@@ -63,19 +63,19 @@ async function loadMenuFromSheets() {
         
         // Converter dados do Sheets para formato esperado
         menuData = data.map(item => {
-            const precoBruto = item.preço || item.preco || '0';
+            const precoBruto = item.Preço || item.preco || '0';
             const precoLimpo = precoBruto.toString().replace(',', '.');
             const precoConvertido = parseFloat(precoLimpo);
             
-            console.log(`Convertendo preço: ${item.produto} | Bruto: ${precoBruto} | Limpo: ${precoLimpo} | Convertido: ${precoConvertido}`);
+            console.log(`Convertendo preço: ${item.Produto} | Bruto: ${precoBruto} | Limpo: ${precoLimpo} | Convertido: ${precoConvertido}`);
             
             return {
-                name: item.produto || item.nome || '',
+                name: item.Produto || item.produto || item.nome || '',
                 price: precoConvertido,
-                category: item.categoria || 'executivos',
-                special: (item.especial || item.special || '').toLowerCase() === 'sim',
-                available: (item.disponível || item.disponivel || 'sim').toLowerCase() === 'sim',
-                ingredients: item.ingredientes || item.ingredientes || '',
+                category: item.Categoria || item.categoria || 'executivos',
+                special: (item.Especial || item.especial || '').toLowerCase() === 'sim',
+                available: (item.Disponível || item.disponivel || 'sim').toLowerCase() === 'sim',
+                ingredients: item.Ingredientes || item.ingredientes || '',
                 description: item.descricao || 'Marmita artesanal com 600g de pura qualidade',
                 rowIndex: item.row_index
             };
