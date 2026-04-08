@@ -31,6 +31,11 @@ app.get('/health', (req, res) => {
 // Endpoint para buscar cardápio
 app.get('/api/cardapio', async (req, res) => {
     try {
+        console.log('🔍 Buscando cardápio...');
+        console.log('GOOGLE_CREDENTIALS existe?', !!process.env.GOOGLE_CREDENTIALS);
+        console.log('SPREADSHEET_ID:', process.env.SPREADSHEET_ID);
+        console.log('RANGE:', process.env.RANGE);
+        
         const authClient = await auth.getClient();
         await google.auth.setCredentials(authClient.credentials);
 
@@ -56,10 +61,12 @@ app.get('/api/cardapio', async (req, res) => {
             return obj;
         });
 
+        console.log('✅ Cardápio carregado:', data.length, 'itens');
         res.json(data);
     } catch (error) {
-        console.error('Erro ao buscar cardápio:', error);
-        res.status(500).json({ error: 'Erro ao buscar dados do cardápio' });
+        console.error('❌ Erro ao buscar cardápio:', error.message);
+        console.error('Stack:', error.stack);
+        res.status(500).json({ error: 'Erro ao buscar dados do cardápio', details: error.message });
     }
 });
 
